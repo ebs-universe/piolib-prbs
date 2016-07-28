@@ -50,7 +50,7 @@
  * 
  * The LFSR implemented is a binary Galois LFSR.
  */
-typedef struct {
+typedef struct LFSR16_t{
     uint16_t _seed;      /**< @brief Seed value for the LFSR */
     uint16_t _taps;      /**< @brief Mask representing the taps in the LFSR */
     uint32_t _period;    /**< @brief Determines the state of the LFSR. Each propagate step increments this */
