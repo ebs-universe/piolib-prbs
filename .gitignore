@@ -1,3 +1,4 @@
 msp430/
 host/
 *.kdev4
+*.idea
