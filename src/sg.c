@@ -20,40 +20,47 @@
 */
 
 /**
- * @file prbs.c
- * @brief Implementation of the prbs generators
+ * @file lfsr.c
+ * @brief Implementation of the lfsr prbs generator
  * 
- * See prbs.h for usage documentation. Implementation 
+ * See lfsr.h for usage documentation. Implementation 
  * documentation should be added to this file as some point. 
  * 
- * @see prbs.h
+ * @see lfsr.h
  */
 
-#include "prbs.h"
+#include "sg.h"
 
-void lfsr_vInit(lfsr16_t * lfsrp, uint16_t seed, uint16_t taps){
-    lfsrp->_period = 0;
-    lfsrp->_seed = seed;
-    lfsrp->_lfsr = seed;
-    lfsrp->_taps = taps;
+void sg_lfsr16_vInit(sg_lfsr16_t * sg, 
+                     uint16_t seed_a, uint16_t taps_a, 
+                     uint16_t seed_b, uint16_t taps_b)
+{
+    lfsr_vInit(&(sg->a), seed_a, taps_a);
+    lfsr_vInit(&(sg->b), seed_b, taps_b);
 }
 
-uint8_t lfsr_cGetNextByte(lfsr16_t *lfsrp){
-    uint8_t i, bit;
+void sg_lfsr16_vAddEntropy(sg_lfsr16_t * sg, uint8_t * entropy){
+    lfsr_vAddEntropy(&(sg->a), &entropy[0]);
+    lfsr_vAddEntropy(&(sg->b), &entropy[2]);
+}
+
+uint8_t sg_lfsr16_cGetNextByte(sg_lfsr16_t * sg){
+    int i, bit;
     uint8_t byte=0;
     for (i=0; i<8; i++){
-        bit = lfsr_bGetNextBit(lfsrp);
+        bit = sg_lfsr16_bGetNextBit(sg);
         byte |= bit<<i;
     }
     return byte;
 }
 
-uint8_t lfsr_bGetNextBit(lfsr16_t * lfsrp){
-    uint8_t lsb = lfsrp->_lfsr & 1;
-    (lfsrp->_lfsr) >>= 1;                   /* Shift register */
-    if (lsb == 1)                           /* Only apply toggle mask if output bit is 1*/
-        (lfsrp->_lfsr) ^= (lfsrp->_taps);   /* Apply toggle mask, value has 1 at bits 
-                                               corresponding to taps, 0 elsewhere. */
-    ++(lfsrp->_period);
-    return lsb;
+int sg_lfsr16_bGetNextBit(sg_lfsr16_t * sg){
+    int a, b; 
+    a = lfsr_bGetNextBit(&(sg->a));
+    b = lfsr_bGetNextBit(&(sg->b));
+    while(!a){
+        a = lfsr_bGetNextBit(&(sg->a));
+        b = lfsr_bGetNextBit(&(sg->b));
+    }
+    return b;
 }

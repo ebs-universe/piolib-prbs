@@ -23,64 +23,45 @@
  * @file prbs.h
  * @brief Interface and usage of prbs generators.
  *
- * This library provides generators for psuedo random bit sequences. It is 
- * intended for use in BER and protocol tests and should not be considered
- * crytptographically secure. 
+ * This library provides generators for psuedo random bit sequences. 
  * 
- * In principle, a shrinking generator can be constructed of these buffers 
- * which has relatively better cryptographic properties. Implementation of 
- * this is deferred to some unspecified point in the future.
+ * The following generators are currently implemented :
  * 
+ *  - Linear Feedback Shift Register (16 bit)
  * 
- * @see prbs.c
+ *    A 16 bit Galois LFSR implementation, intended for BER and protocol 
+ *    tests. Is not cryptographically secure. 
+ * 
+ *    @see lfsr.h
+ * 
+ *  - Shrinking Generator
+ * 
+ *    A shrinking generator composed of two 16 bit Galois LFSRs. This is 
+ *    not cryptographically secure either, but is probably good enough for 
+ *    relatively non-critical random number generation. This generator
+ *    produces a reasonably good pseduo-random bit stream at a considerably 
+ *    lower cost than other 'better' bit stream generation alogrithms.
+ * 
+ *    @see sg.h
+ * 
+ * Note that for all provided PRBS implementations, using default seeds and
+ * polynomilals provides a deterministic PRBS. In cases where random numbers 
+ * are required (as opposed to a predetermined pseudo random bitstream), the 
+ * generators must be provided with true entropy.
+ * 
+ * One additional pseudo-random bitstream generation algorithm is available 
+ * elsewhere in the EBS universe - the entropium PRNG, from AVR Crypto Lib
+ * and provided from the EBS cryptolib library. Entropium uses a 512 byte 
+ * core and SHA256 and XOR to generate the bytestream. Cryptographic 
+ * properties of entropium don't seem to available. However, entropium is 
+ * significantly more expensive in all respects. 
+ * 
  */
 
-#include<stdint.h>
+#ifndef PRBS_H
+#define PRBS_H
 
-#define LFSR_DEFAULT_SEED 0xACE1
-#define LFSR_DEFAULT_TAPS 0xB400
+#include "lfsr.h"
+#include "sg.h"
 
-/**
- * @brief Primary 16 bit LFSR struct typedef
- * 
- * The core of PRBS implementation is made of this struct, which represents
- * a 16 bit Linear Feedback Shift Register. While values in the struct should
- * not be used directly, the functions listed in the interface can be used to 
- * operate on the LFSR. 
- * 
- * The LFSR implemented is a binary Galois LFSR.
- */
-typedef struct LFSR16_t{
-    uint16_t _seed;      /**< @brief Seed value for the LFSR */
-    uint16_t _taps;      /**< @brief Mask representing the taps in the LFSR */
-    uint32_t _period;    /**< @brief Determines the state of the LFSR. Each propagate step increments this */
-    uint16_t _lfsr;      /**< @brief The actual LFSR */
-} lfsr16_t;
-
-/**
-  * Initialize a ::lfsr16_t structure using specified seed and polynomial (taps). Use the 
-  * included defines of LFSR_DEFAULT_SEED and LFSR_DEFAULT_TAPS or provide your own.
-  * Note that typically the same values of seed and taps must be used at both ends of 
-  * the transport.
-  * 
-  * @param *lfsrp Pointer to the ::lfsr16_t structure to be initialized.
-  * @param seed Seed value for the shift register.
-  * @param taps Taps for the shift register
-  */
-void lfsr_vInit(lfsr16_t * lfsrp, uint16_t seed, uint16_t taps);
-
-/**
-  * Get the next byte in the pseudo random binary sequency.
-  * 
-  * @param *lfsrp Pointer to the ::lfsr16_t structure.
-  * @return The next byte in the sequence.
-  */
-uint8_t lfsr_cGetNextByte(lfsr16_t * lfsrp);
-
-/**
-  * Get the next bit in the pseudo random binary sequency.
-  * 
-  * @param *lfsrp Pointer to the ::lfsr16_t structure.
-  * @return The next bit in the sequence.
-  */
-uint8_t lfsr_bGetNextBit(lfsr16_t * lfsrp);
+#endif
