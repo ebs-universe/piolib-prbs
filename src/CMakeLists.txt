@@ -38,7 +38,7 @@ ELSE(CMAKE_TOOLCHAIN_FILE)
     INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
     INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
     SET(CMAKE_SWIG_FLAGS "")
-    SWIG_ADD_MODULE(prbs python prbs.i lfsr.c sg.c)
+    SWIG_ADD_MODULE(prbs python prbs.i lfsr.c sg.c asg.c)
     SWIG_LINK_LIBRARIES(prbs ${PYTHON_LIBRARIES})
     
     # Install PYTHON bindings

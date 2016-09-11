@@ -19,30 +19,48 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
-/**
- * @file lfsr.c
- * @brief Implementation of the lfsr prbs generator
- * 
- * See lfsr.h for usage documentation. Implementation 
- * documentation should be added to this file as some point. 
- * 
- * @see lfsr.h
- */
-
 #include "sg.h"
 
 void sg_lfsr16_vInit(sg_lfsr16_t * sg, 
                      uint16_t seed_a, uint16_t taps_a, 
                      uint16_t seed_b, uint16_t taps_b)
 {
-    lfsr_vInit(&(sg->a), seed_a, taps_a);
-    lfsr_vInit(&(sg->b), seed_b, taps_b);
+    lfsr16_vInit(&(sg->a), seed_a, taps_a);
+    lfsr16_vInit(&(sg->b), seed_b, taps_b);
 }
 
-void sg_lfsr16_vAddEntropy(sg_lfsr16_t * sg, uint8_t * entropy){
-    lfsr_vAddEntropy(&(sg->a), &entropy[0]);
-    lfsr_vAddEntropy(&(sg->b), &entropy[2]);
+void sg_lfsr32_vInit(sg_lfsr32_t * sg, 
+                     uint32_t seed_a, uint32_t taps_a, 
+                     uint32_t seed_b, uint32_t taps_b)
+{
+    lfsr32_vInit(&(sg->a), seed_a, taps_a);
+    lfsr32_vInit(&(sg->b), seed_b, taps_b);
 }
+
+void sg_lfsr64_vInit(sg_lfsr64_t * sg, 
+                     uint64_t seed_a, uint64_t taps_a, 
+                     uint64_t seed_b, uint64_t taps_b)
+{
+    lfsr64_vInit(&(sg->a), seed_a, taps_a);
+    lfsr64_vInit(&(sg->b), seed_b, taps_b);
+}
+
+
+void sg_lfsr16_vAddEntropy(sg_lfsr16_t * sg, uint8_t * entropy){
+    lfsr16_vAddEntropy(&(sg->a), &entropy[0]);
+    lfsr16_vAddEntropy(&(sg->b), &entropy[2]);
+}
+
+void sg_lfsr32_vAddEntropy(sg_lfsr32_t * sg, uint8_t * entropy){
+    lfsr32_vAddEntropy(&(sg->a), &entropy[0]);
+    lfsr32_vAddEntropy(&(sg->b), &entropy[4]);
+}
+
+void sg_lfsr64_vAddEntropy(sg_lfsr64_t * sg, uint8_t * entropy){
+    lfsr64_vAddEntropy(&(sg->a), &entropy[0]);
+    lfsr64_vAddEntropy(&(sg->b), &entropy[8]);
+}
+
 
 uint8_t sg_lfsr16_cGetNextByte(sg_lfsr16_t * sg){
     int i, bit;
@@ -54,13 +72,56 @@ uint8_t sg_lfsr16_cGetNextByte(sg_lfsr16_t * sg){
     return byte;
 }
 
+uint8_t sg_lfsr32_cGetNextByte(sg_lfsr32_t * sg){
+    int i, bit;
+    uint8_t byte=0;
+    for (i=0; i<8; i++){
+        bit = sg_lfsr32_bGetNextBit(sg);
+        byte |= bit<<i;
+    }
+    return byte;
+}
+
+uint8_t sg_lfsr64_cGetNextByte(sg_lfsr64_t * sg){
+    int i, bit;
+    uint8_t byte=0;
+    for (i=0; i<8; i++){
+        bit = sg_lfsr64_bGetNextBit(sg);
+        byte |= bit<<i;
+    }
+    return byte;
+}
+
+
 int sg_lfsr16_bGetNextBit(sg_lfsr16_t * sg){
     int a, b; 
-    a = lfsr_bGetNextBit(&(sg->a));
-    b = lfsr_bGetNextBit(&(sg->b));
+    a = lfsr16_bGetNextBit(&(sg->a));
+    b = lfsr16_bGetNextBit(&(sg->b));
     while(!a){
-        a = lfsr_bGetNextBit(&(sg->a));
-        b = lfsr_bGetNextBit(&(sg->b));
+        a = lfsr16_bGetNextBit(&(sg->a));
+        b = lfsr16_bGetNextBit(&(sg->b));
+    }
+    return b;
+}
+
+int sg_lfsr32_bGetNextBit(sg_lfsr32_t * sg){
+    int a, b; 
+    a = lfsr32_bGetNextBit(&(sg->a));
+    b = lfsr32_bGetNextBit(&(sg->b));
+    while(!a){
+        a = lfsr32_bGetNextBit(&(sg->a));
+        b = lfsr32_bGetNextBit(&(sg->b));
+    }
+    return b;
+}
+
+int sg_lfsr64_bGetNextBit(sg_lfsr64_t * sg){
+    int a, b; 
+    a = lfsr64_bGetNextBit(&(sg->a));
+    b = lfsr64_bGetNextBit(&(sg->b));
+    while(!a){
+        a = lfsr64_bGetNextBit(&(sg->a));
+        b = lfsr64_bGetNextBit(&(sg->b));
     }
     return b;
 }

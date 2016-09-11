@@ -54,11 +54,19 @@
  * The LFSR implemented is a binary Galois LFSR.
  */
 typedef struct LFSR16_t{
-    //uint16_t _seed;      /**< @brief Seed value for the LFSR */
     uint16_t _taps;      /**< @brief Mask representing the taps in the LFSR */
-    //uint32_t _period;    /**< @brief Determines the state of the LFSR. Each propagate step increments this */
     uint16_t _lfsr;      /**< @brief The actual LFSR */
 } lfsr16_t;
+
+typedef struct LFSR32_t{
+    uint32_t _taps;      /**< @brief Mask representing the taps in the LFSR */
+    uint32_t _lfsr;      /**< @brief The actual LFSR */
+} lfsr32_t;
+
+typedef struct LFSR64_t{
+    uint64_t _taps;      /**< @brief Mask representing the taps in the LFSR */
+    uint64_t _lfsr;      /**< @brief The actual LFSR */
+} lfsr64_t;
 
 /**
   * Initialize a ::lfsr16_t structure using specified seed and 
@@ -71,7 +79,11 @@ typedef struct LFSR16_t{
   * @param seed Seed value for the shift register.
   * @param taps Taps for the shift register
   */
-void lfsr_vInit(lfsr16_t * lfsrp, uint16_t seed, uint16_t taps);
+void lfsr16_vInit(lfsr16_t * lfsrp, uint16_t seed, uint16_t taps);
+
+void lfsr32_vInit(lfsr32_t * lfsrp, uint32_t seed, uint32_t taps);
+
+void lfsr64_vInit(lfsr64_t * lfsrp, uint64_t seed, uint64_t taps);
 
 /**
  * Add entropy to a ::lfsr16_t structure. This function simply replaces 
@@ -81,7 +93,11 @@ void lfsr_vInit(lfsr16_t * lfsrp, uint16_t seed, uint16_t taps);
  * @param *entropy Pointer to a buffer containing the atleast 2 bytes of 
  *                 entropy, preferably from a random source, 
  */
-void lfsr_vAddEntropy(lfsr16_t * lfsrp, uint8_t * entropy);
+void lfsr16_vAddEntropy(lfsr16_t * lfsrp, uint8_t * entropy);
+
+void lfsr32_vAddEntropy(lfsr32_t * lfsrp, uint8_t * entropy);
+
+void lfsr64_vAddEntropy(lfsr64_t * lfsrp, uint8_t * entropy);
 
 /**
   * Get the next byte in the pseudo random binary sequence.
@@ -89,7 +105,11 @@ void lfsr_vAddEntropy(lfsr16_t * lfsrp, uint8_t * entropy);
   * @param *lfsrp Pointer to the ::lfsr16_t structure.
   * @return The next byte in the sequence.
   */
-uint8_t lfsr_cGetNextByte(lfsr16_t * lfsrp);
+uint8_t lfsr16_cGetNextByte(lfsr16_t * lfsrp);
+
+uint8_t lfsr32_cGetNextByte(lfsr32_t * lfsrp);
+
+uint8_t lfsr64_cGetNextByte(lfsr64_t * lfsrp);
 
 /**
   * Get the next bit in the pseudo random binary sequence.
@@ -97,6 +117,9 @@ uint8_t lfsr_cGetNextByte(lfsr16_t * lfsrp);
   * @param *lfsrp Pointer to the ::lfsr16_t structure.
   * @return The next bit in the sequence.
   */
-int lfsr_bGetNextBit(lfsr16_t * lfsrp);
+int lfsr16_bGetNextBit(lfsr16_t * lfsrp);
 
+int lfsr32_bGetNextBit(lfsr32_t * lfsrp);
+
+int lfsr64_bGetNextBit(lfsr64_t * lfsrp);
 #endif

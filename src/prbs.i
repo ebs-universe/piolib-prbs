@@ -6,9 +6,11 @@
  #include "prbs.h"
  #include "lfsr.h"
  #include "sg.h"
+ #include "asg.h"
  %}
 
  /* Parse the header file to generate wrappers */
  %include "prbs.h"
  %include "lfsr.h"
  %include "sg.h"
+ %include "asg.h"

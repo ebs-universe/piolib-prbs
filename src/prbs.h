@@ -30,24 +30,43 @@
  *  - Linear Feedback Shift Register (16 bit)
  * 
  *    A 16 bit Galois LFSR implementation, intended for BER and protocol 
- *    tests. Is not cryptographically secure. 
+ *    tests. Is not cryptographically secure. The LFSR has a maximal period
+ *    of (2^16 - 1), for the correct choice of polynomials. This period is 
+ *    pretty short for most random applications. Increasing the length of the
+ *    state variable, and consequently the period, has serious implications 
+ *    on performance. 
  * 
  *    @see lfsr.h
  * 
  *  - Shrinking Generator
  * 
  *    A shrinking generator composed of two 16 bit Galois LFSRs. This is 
- *    not cryptographically secure either, but is probably good enough for 
- *    relatively non-critical random number generation. This generator
- *    produces a reasonably good pseduo-random bit stream at a considerably 
- *    lower cost than other 'better' bit stream generation alogrithms.
- * 
+ *    not cryptographically secure either. Due to the short periods of the
+ *    included LFSRs, this generator has minimal applications in the real 
+ *    world. It needs _much_ longer LFSRs to be useful.
+ *    
  *    @see sg.h
+ * 
+ *  - Alternating Step Generator
+ * 
+ *    Composed of three 16 bit Galois LFSRs. This is not cryptographically
+ *    secure. This is probably the optimal generator for relatively 
+ *    non-critical random number generation. This generator produces a 
+ *    reasonably good pseduo-random bit stream at a considerably lower 
+ *    cost than other 'better' bit stream generation alogrithms.
+ * 
+ *    @see asg.h
  * 
  * Note that for all provided PRBS implementations, using default seeds and
  * polynomilals provides a deterministic PRBS. In cases where random numbers 
  * are required (as opposed to a predetermined pseudo random bitstream), the 
  * generators must be provided with true entropy.
+ * 
+ * Better performance is expected if the polynomials chosen for each LFSR 
+ * in generators using multiple LFSRs result in diferent periods. One of 
+ * the LFSRs can be set to provide maximal period, and the other(s) should 
+ * produce close to - but less than - the maximal period. This is an 
+ * untested hypothesis. 
  * 
  * One additional pseudo-random bitstream generation algorithm is available 
  * elsewhere in the EBS universe - the entropium PRNG, from AVR Crypto Lib
@@ -63,5 +82,6 @@
 
 #include "lfsr.h"
 #include "sg.h"
+#include "asg.h"
 
 #endif
