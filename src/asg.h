@@ -69,52 +69,38 @@ typedef struct ASG_LFSR64_t{
 
 
 /**
-  * Initialize an ::asg_lfsr16_t structure using the specified seeds and 
-  * polynomials (taps).
+  * Initialize an ::asg_lfsr16_t structure using the default seeds and 
+  * polynomials (taps). Entropy may be added after using the AddEntropy
+  * function
   * 
-  * @param *asg Pointer to the ::asg_lfsr16_t structure to be initialized.
-  * @param seed_a Seed value for the A shift register.
-  * @param taps_a Taps for the A shift register.
-  * @param seed_b Seed value for the B shift register.
-  * @param taps_b Taps for the B shift register.
-  * @param seed_c Seed value for the C shift register.
-  * @param taps_c Taps for the C shift register.
+  * @param asg Pointer to the ::asg_lfsr16_t structure to be initialized.
   */
-void asg_lfsr16_vInit(asg_lfsr16_t * asg, 
-                      uint16_t seed_a, uint16_t taps_a, 
-                      uint16_t seed_b, uint16_t taps_b,
-                      uint16_t seed_c, uint16_t taps_c);
+void asg_lfsr16_vInit(asg_lfsr16_t * asg);
 
-void asg_lfsr32_vInit(asg_lfsr32_t * asg, 
-                      uint32_t seed_a, uint32_t taps_a, 
-                      uint32_t seed_b, uint32_t taps_b,
-                      uint32_t seed_c, uint32_t taps_c);
+void asg_lfsr32_vInit(asg_lfsr32_t * asg);
 
-void asg_lfsr64_vInit(asg_lfsr64_t * asg, 
-                      uint64_t seed_a, uint64_t taps_a, 
-                      uint64_t seed_b, uint64_t taps_b,
-                      uint64_t seed_c, uint64_t taps_c);
+void asg_lfsr64_vInit(asg_lfsr64_t * asg);
 
 
 /**
  * Add entropy to an ::asg_lfsr16_t structure. This function simply replaces 
  * the seeds with the provided entropy.
  * 
- * @param *asg Pointer to the ::asg_lfsr16_t structure.
- * @param *entropy Pointer to a buffer containing the atleast 6 bytes of 
+ * @param asg Pointer to the ::asg_lfsr16_t structure.
+ * @param entropy Pointer to a buffer containing the atleast 6 bytes of 
  *                 entropy, preferably from a random source, 
  */
-void asg_lfsr16_vAddEntropy(asg_lfsr16_t * asg, uint8_t * entropy);
+void asg_lfsr16_vAddEntropy(asg_lfsr16_t * asg, void * entropy);
 
-void asg_lfsr32_vAddEntropy(asg_lfsr32_t * asg, uint8_t * entropy);
+void asg_lfsr32_vAddEntropy(asg_lfsr32_t * asg, void * entropy);
 
-void asg_lfsr64_vAddEntropy(asg_lfsr64_t * asg, uint8_t * entropy);
+void asg_lfsr64_vAddEntropy(asg_lfsr64_t * asg, void * entropy);
 
 
 /**
   * Get the next byte in the pseudo random binary sequence.
   * 
-  * @param *asg Pointer to the ::asg_lfsr16_t structure.
+  * @param asg Pointer to the ::asg_lfsr16_t structure.
   * @return The next byte in the sequence.
   */
 uint8_t asg_lfsr16_cGetNextByte(asg_lfsr16_t * asg);
@@ -127,7 +113,7 @@ uint8_t asg_lfsr64_cGetNextByte(asg_lfsr64_t * asg);
 /**
   * Get the next bit in the pseudo random binary sequence.
   * 
-  * @param *asg Pointer to the ::asg_lfsr16_t structure.
+  * @param asg Pointer to the ::asg_lfsr16_t structure.
   * @return The next bit in the sequence.
   */
 int asg_lfsr16_bGetNextBit(asg_lfsr16_t * asg);

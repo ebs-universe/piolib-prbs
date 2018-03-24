@@ -21,53 +21,44 @@
 
 #include "asg.h"
 
-void asg_lfsr16_vInit(asg_lfsr16_t * asg, 
-                     uint16_t seed_a, uint16_t taps_a, 
-                     uint16_t seed_b, uint16_t taps_b,
-                     uint16_t seed_c, uint16_t taps_c)
+void asg_lfsr16_vInit(asg_lfsr16_t * asg)
 {
-    lfsr16_vInit(&(asg->a), seed_a, taps_a);
-    lfsr16_vInit(&(asg->b), seed_b, taps_b);
-    lfsr16_vInit(&(asg->c), seed_c, taps_c);
+    lfsr16_vInit(&(asg->a));
+    lfsr16_vInit(&(asg->b));
+    lfsr16_vInit(&(asg->c));
 }
 
-void asg_lfsr32_vInit(asg_lfsr32_t * asg, 
-                      uint32_t seed_a, uint32_t taps_a, 
-                      uint32_t seed_b, uint32_t taps_b,
-                      uint32_t seed_c, uint32_t taps_c)
+void asg_lfsr32_vInit(asg_lfsr32_t * asg)
 {
-    lfsr32_vInit(&(asg->a), seed_a, taps_a);
-    lfsr32_vInit(&(asg->b), seed_b, taps_b);
-    lfsr32_vInit(&(asg->c), seed_c, taps_c);
+    lfsr32_vInit(&(asg->a));
+    lfsr32_vInit(&(asg->b));
+    lfsr32_vInit(&(asg->c));
 }
 
-void asg_lfsr64_vInit(asg_lfsr64_t * asg, 
-                      uint64_t seed_a, uint64_t taps_a, 
-                      uint64_t seed_b, uint64_t taps_b,
-                      uint64_t seed_c, uint64_t taps_c)
+void asg_lfsr64_vInit(asg_lfsr64_t * asg)
 {
-    lfsr64_vInit(&(asg->a), seed_a, taps_a);
-    lfsr64_vInit(&(asg->b), seed_b, taps_b);
-    lfsr64_vInit(&(asg->c), seed_c, taps_c);
+    lfsr64_vInit(&(asg->a));
+    lfsr64_vInit(&(asg->b));
+    lfsr64_vInit(&(asg->c));
 }
 
 
-void asg_lfsr16_vAddEntropy(asg_lfsr16_t * asg, uint8_t * entropy){
-    lfsr16_vAddEntropy(&(asg->a), &entropy[0]);
-    lfsr16_vAddEntropy(&(asg->b), &entropy[2]);
-    lfsr16_vAddEntropy(&(asg->c), &entropy[4]);
+void asg_lfsr16_vAddEntropy(asg_lfsr16_t * asg, void * entropy){
+    lfsr16_vAddEntropy(&(asg->a), (void *)(uint16_t *)entropy);
+    lfsr16_vAddEntropy(&(asg->b), (void *)((uint16_t *)entropy + 1));
+    lfsr16_vAddEntropy(&(asg->c), (void *)((uint16_t *)entropy + 2));
 }
 
-void asg_lfsr32_vAddEntropy(asg_lfsr32_t * asg, uint8_t * entropy){
-    lfsr32_vAddEntropy(&(asg->a), &entropy[0]);
-    lfsr32_vAddEntropy(&(asg->b), &entropy[4]);
-    lfsr32_vAddEntropy(&(asg->c), &entropy[8]);
+void asg_lfsr32_vAddEntropy(asg_lfsr32_t * asg, void * entropy){
+    lfsr32_vAddEntropy(&(asg->a), (void *)(uint32_t *)entropy);
+    lfsr32_vAddEntropy(&(asg->b), (void *)((uint32_t *)entropy + 1));
+    lfsr32_vAddEntropy(&(asg->c), (void *)((uint32_t *)entropy + 2));
 }
 
-void asg_lfsr64_vAddEntropy(asg_lfsr64_t * asg, uint8_t * entropy){
-    lfsr64_vAddEntropy(&(asg->a), &entropy[0]);
-    lfsr64_vAddEntropy(&(asg->b), &entropy[8]);
-    lfsr64_vAddEntropy(&(asg->c), &entropy[16]);
+void asg_lfsr64_vAddEntropy(asg_lfsr64_t * asg, void * entropy){
+    lfsr64_vAddEntropy(&(asg->a), (void *)(uint64_t *)entropy);
+    lfsr64_vAddEntropy(&(asg->b), (void *)((uint64_t *)entropy + 1));
+    lfsr64_vAddEntropy(&(asg->c), (void *)((uint64_t *)entropy + 2));
 }
 
 

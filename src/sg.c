@@ -21,44 +21,38 @@
 
 #include "sg.h"
 
-void sg_lfsr16_vInit(sg_lfsr16_t * sg, 
-                     uint16_t seed_a, uint16_t taps_a, 
-                     uint16_t seed_b, uint16_t taps_b)
+void sg_lfsr16_vInit(sg_lfsr16_t * sg)
 {
-    lfsr16_vInit(&(sg->a), seed_a, taps_a);
-    lfsr16_vInit(&(sg->b), seed_b, taps_b);
+    lfsr16_vInit(&(sg->a));
+    lfsr16_vInit(&(sg->b));
 }
 
-void sg_lfsr32_vInit(sg_lfsr32_t * sg, 
-                     uint32_t seed_a, uint32_t taps_a, 
-                     uint32_t seed_b, uint32_t taps_b)
+void sg_lfsr32_vInit(sg_lfsr32_t * sg)
 {
-    lfsr32_vInit(&(sg->a), seed_a, taps_a);
-    lfsr32_vInit(&(sg->b), seed_b, taps_b);
+    lfsr32_vInit(&(sg->a));
+    lfsr32_vInit(&(sg->b));
 }
 
-void sg_lfsr64_vInit(sg_lfsr64_t * sg, 
-                     uint64_t seed_a, uint64_t taps_a, 
-                     uint64_t seed_b, uint64_t taps_b)
+void sg_lfsr64_vInit(sg_lfsr64_t * sg)
 {
-    lfsr64_vInit(&(sg->a), seed_a, taps_a);
-    lfsr64_vInit(&(sg->b), seed_b, taps_b);
+    lfsr64_vInit(&(sg->a));
+    lfsr64_vInit(&(sg->b));
 }
 
 
-void sg_lfsr16_vAddEntropy(sg_lfsr16_t * sg, uint8_t * entropy){
-    lfsr16_vAddEntropy(&(sg->a), &entropy[0]);
-    lfsr16_vAddEntropy(&(sg->b), &entropy[2]);
+void sg_lfsr16_vAddEntropy(sg_lfsr16_t * sg, void * entropy){
+    lfsr16_vAddEntropy(&(sg->a), (void *)(uint16_t *)entropy);
+    lfsr16_vAddEntropy(&(sg->b), (void *)((uint16_t *)entropy + 1));
 }
 
-void sg_lfsr32_vAddEntropy(sg_lfsr32_t * sg, uint8_t * entropy){
-    lfsr32_vAddEntropy(&(sg->a), &entropy[0]);
-    lfsr32_vAddEntropy(&(sg->b), &entropy[4]);
+void sg_lfsr32_vAddEntropy(sg_lfsr32_t * sg, void * entropy){
+    lfsr32_vAddEntropy(&(sg->a), (void *)(uint32_t *)entropy);
+    lfsr32_vAddEntropy(&(sg->b), (void *)((uint32_t *)entropy + 1));
 }
 
-void sg_lfsr64_vAddEntropy(sg_lfsr64_t * sg, uint8_t * entropy){
-    lfsr64_vAddEntropy(&(sg->a), &entropy[0]);
-    lfsr64_vAddEntropy(&(sg->b), &entropy[8]);
+void sg_lfsr64_vAddEntropy(sg_lfsr64_t * sg, void * entropy){
+    lfsr64_vAddEntropy(&(sg->a), (void *)(uint64_t *)entropy);
+    lfsr64_vAddEntropy(&(sg->b), (void *)((uint64_t *)entropy + 1));
 }
 
 

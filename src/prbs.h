@@ -62,18 +62,26 @@
  * are required (as opposed to a predetermined pseudo random bitstream), the 
  * generators must be provided with true entropy.
  * 
- * Better performance is expected if the polynomials chosen for each LFSR 
- * in generators using multiple LFSRs result in diferent periods. One of 
- * the LFSRs can be set to provide maximal period, and the other(s) should 
- * produce close to - but less than - the maximal period. This is an 
- * untested hypothesis. 
- * 
- * One additional pseudo-random bitstream generation algorithm is available 
+ * One additional pseudo-random bytestream generation algorithm is available 
  * elsewhere in the EBS universe - the entropium PRNG, from AVR Crypto Lib
- * and provided from the EBS cryptolib library. Entropium uses a 512 byte 
+ * and provided from the EBS cryptolib library. Entropium uses a 512 bit 
  * core and SHA256 and XOR to generate the bytestream. Cryptographic 
  * properties of entropium don't seem to available. However, entropium is 
  * significantly more expensive in all respects. 
+ * 
+ * The following PRNGs look amusing but are not yet included here : 
+ *  - TinyMT : The 32-bit variant of the Mersenne Twister may be able to run
+ *             on constrained platforms, but seems still too heavy to 
+ *             prioritize implementation
+ *  - PCG : The permuted congruential generator, while probably heavier than
+ *          LFSRs, may provide the best of multiple worlds. Implementation is
+ *          currently deferred pending performance testing on the rand() LCG.
+ * 
+ * Of course, GCC/glibc's stdlib provides an LCG based rand() function which
+ * can be used as well. A serious attempt to provide a stripped down version 
+ * is not made. The combination of multiplication, non-2^N modulus, and 
+ * constraints on state size seem unlikely to make it worth the effort beyond
+ * whatever stdlib provides. 
  * 
  */
 

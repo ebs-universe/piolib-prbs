@@ -32,36 +32,29 @@
 #include "lfsr.h"
 
 
-void lfsr16_vInit(lfsr16_t * lfsrp, uint16_t seed, uint16_t taps){
-    lfsrp->_lfsr = seed;
-    lfsrp->_taps = taps;
+void lfsr16_vInit(lfsr16_t * lfsrp){
+    *lfsrp = LFSR16_SEED;
 }
 
-void lfsr32_vInit(lfsr32_t * lfsrp, uint32_t seed, uint32_t taps){
-    lfsrp->_lfsr = seed;
-    lfsrp->_taps = taps;
+void lfsr32_vInit(lfsr32_t * lfsrp){
+    *lfsrp = LFSR32_SEED;
 }
 
-void lfsr64_vInit(lfsr64_t * lfsrp, uint64_t seed, uint64_t taps){
-    lfsrp->_lfsr = seed;
-    lfsrp->_taps = taps;
+void lfsr64_vInit(lfsr64_t * lfsrp){
+    *lfsrp = LFSR64_SEED;
 }
 
 
-void lfsr16_vAddEntropy(lfsr16_t * lfsrp, uint8_t * entropy){
-    lfsrp->_lfsr = entropy[0] << 8 | entropy[1];
+void lfsr16_vAddEntropy(lfsr16_t * lfsrp, void * entropy){
+    *lfsrp = *(uint16_t*)entropy;
 }
 
-void lfsr32_vAddEntropy(lfsr32_t * lfsrp, uint8_t * entropy){
-    lfsrp->_lfsr = (uint32_t)entropy[0] << 24 | (uint32_t)entropy[1] << 16 | 
-                   (uint32_t)entropy[2] << 8  | (uint32_t)entropy[3];
+void lfsr32_vAddEntropy(lfsr32_t * lfsrp, void * entropy){
+    *lfsrp = *(uint32_t*)entropy;
 }
 
-void lfsr64_vAddEntropy(lfsr64_t * lfsrp, uint8_t * entropy){
-    lfsrp->_lfsr = (uint64_t)entropy[0] << 56 | (uint64_t)entropy[1] << 48 | 
-                   (uint64_t)entropy[2] << 40 | (uint64_t)entropy[3] << 32 |
-                   (uint64_t)entropy[4] << 24 | (uint64_t)entropy[5] << 16 | 
-                   (uint64_t)entropy[6] << 8  | (uint64_t)entropy[7];
+void lfsr64_vAddEntropy(lfsr64_t * lfsrp, void * entropy){
+    *lfsrp = *(uint64_t*)entropy;
 }
 
 
@@ -97,28 +90,28 @@ uint8_t lfsr64_cGetNextByte(lfsr64_t *lfsrp){
 
 
 int lfsr16_bGetNextBit(lfsr16_t * lfsrp){
-    int lsb = lfsrp->_lfsr & 1;
-    (lfsrp->_lfsr) >>= 1;                   /* Shift register */
-    if (lsb == 1)                           /* Only apply toggle mask if output bit is 1*/
-        (lfsrp->_lfsr) ^= (lfsrp->_taps);   /* Apply toggle mask, value has 1 at bits 
-                                               corresponding to taps, 0 elsewhere. */
+    int lsb = *lfsrp & 1;
+    *lfsrp >>= 1;                   /* Shift register */
+    if (lsb == 1){                  /* Only apply toggle mask if output bit is 1*/
+        *lfsrp ^= LFSR16_TAPS;      /* Apply toggle mask, value has 1 at bits corresponding to taps, 0 elsewhere. */
+    }
     return lsb;
 }
 
 int lfsr32_bGetNextBit(lfsr32_t * lfsrp){
-    int lsb = lfsrp->_lfsr & 1;
-    (lfsrp->_lfsr) >>= 1;                   /* Shift register */
-    if (lsb == 1)                           /* Only apply toggle mask if output bit is 1*/
-        (lfsrp->_lfsr) ^= (lfsrp->_taps);   /* Apply toggle mask, value has 1 at bits 
-                                               corresponding to taps, 0 elsewhere. */
-        return lsb;
+    int lsb = *lfsrp & 1;
+    *lfsrp >>= 1;                   
+    if (lsb == 1){                          
+        *lfsrp ^= LFSR32_TAPS;   
+    }
+    return lsb;
 }
 
 int lfsr64_bGetNextBit(lfsr64_t * lfsrp){
-    int lsb = lfsrp->_lfsr & 1;
-    (lfsrp->_lfsr) >>= 1;                   /* Shift register */
-    if (lsb == 1)                           /* Only apply toggle mask if output bit is 1*/
-        (lfsrp->_lfsr) ^= (lfsrp->_taps);   /* Apply toggle mask, value has 1 at bits 
-                                               corresponding to taps, 0 elsewhere. */
-        return lsb;
+    int lsb = *lfsrp & 1;
+    *lfsrp >>= 1;
+    if (lsb == 1){
+        *lfsrp ^= LFSR64_TAPS;
+    }
+    return lsb;
 }
