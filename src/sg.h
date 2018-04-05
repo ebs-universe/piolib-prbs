@@ -157,7 +157,7 @@ void sg_lfsr64_vAddEntropy(sg_lfsr64_t * sg, void * entropy);
 /**@{*/ 
 
 /**
-  * Get the next byte in the SG16 pseudo random binary sequence.
+  * @brief Get the next byte in the SG16 pseudo random binary sequence.
   * 
   * @param sg Pointer to the ::sg_lfsr16_t structure.
   * @return The next byte in the sequence.
@@ -165,7 +165,7 @@ void sg_lfsr64_vAddEntropy(sg_lfsr64_t * sg, void * entropy);
 uint8_t sg_lfsr16_cGetNextByte(sg_lfsr16_t * sg);
 
 /**
-  * Get the next byte in the SG32 pseudo random binary sequence.
+  * @brief Get the next byte in the SG32 pseudo random binary sequence.
   * 
   * @param sg Pointer to the ::sg_lfsr32_t structure.
   * @return The next byte in the sequence.
@@ -173,7 +173,7 @@ uint8_t sg_lfsr16_cGetNextByte(sg_lfsr16_t * sg);
 uint8_t sg_lfsr32_cGetNextByte(sg_lfsr32_t * sg);
 
 /**
-  * Get the next byte in the SG64 pseudo random binary sequence.
+  * @brief Get the next byte in the SG64 pseudo random binary sequence.
   * 
   * @param sg Pointer to the ::sg_lfsr64_t structure.
   * @return The next byte in the sequence.
