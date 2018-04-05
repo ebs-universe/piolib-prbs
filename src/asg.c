@@ -19,6 +19,15 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
+/**
+ * @file asg.c
+ * @brief Implementation of the asg prbs generator
+ * 
+ * See asg.h for usage documentation. Implementation 
+ * documentation should be added to this file as some point. 
+ *
+ */
+
 #include "asg.h"
 
 void asg_lfsr16_vInit(asg_lfsr16_t * asg)

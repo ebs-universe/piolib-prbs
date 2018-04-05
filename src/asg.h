@@ -38,16 +38,22 @@
 #ifndef PRBS_ASG_H
 #define PRBS_ASG_H
 
-#include<stdint.h>
 #include "lfsr.h"
 
+
 /**
- * @brief 16 bit LFSR based Alternating Step Generator struct typedef
+ * @name Alternating Step Generator Typedefs
  * 
- * The core of ASG PRBS implementation is made of this struct, which represents
- * a LFSR16 based alternating step generator. Values in the struct should not 
- * be used directly. The functions listed in the interface can be used to operate
- * on the ASG. 
+ * These types contain the core of Alternating Step Generators. Each is 
+ * composed of three LFSRs of appropriate sizes. 
+ * 
+ * Values in the struct should not be used directly. The functions listed in 
+ * the interface can be used to operate on the ASG. 
+ */
+/**@{*/ 
+
+/**
+ * @brief 16 bit LFSR based Alternating Step Generator
  */
 typedef struct ASG_LFSR16_t{
     lfsr16_t a;     /**< @brief LFSR16 A */
@@ -55,71 +61,167 @@ typedef struct ASG_LFSR16_t{
     lfsr16_t c;     /**< @brief LFSR16 C */
 } asg_lfsr16_t;
 
+/**
+ * @brief 32 bit LFSR based Alternating Step Generator
+ */
 typedef struct ASG_LFSR32_t{
     lfsr32_t a;     /**< @brief LFSR16 A */
     lfsr32_t b;     /**< @brief LFSR16 B */
     lfsr32_t c;     /**< @brief LFSR16 C */
 } asg_lfsr32_t;
 
+/**
+ * @brief 64 bit LFSR based Alternating Step Generator
+ */
 typedef struct ASG_LFSR64_t{
     lfsr64_t a;     /**< @brief LFSR16 A */
     lfsr64_t b;     /**< @brief LFSR16 B */
     lfsr64_t c;     /**< @brief LFSR16 C */
 } asg_lfsr64_t;
+/**@}*/ 
 
 
 /**
-  * Initialize an ::asg_lfsr16_t structure using the default seeds and 
-  * polynomials (taps). Entropy may be added after using the AddEntropy
-  * function
+ * @name Alternating Step Generator Initialization Functions
+ * 
+ * Intialize the alternating step generator's LFSRs with the default seed. 
+ * These functions are superceded by the AddEntropy functions, and is retained 
+ * here for backwards compatibility.
+ * 
+ * Applications should avoid using these.
+ */
+/**@{*/ 
+
+/**
+  * @brief Initialize a ::asg_lfsr16_t structure using the default seeds
   * 
   * @param asg Pointer to the ::asg_lfsr16_t structure to be initialized.
   */
 void asg_lfsr16_vInit(asg_lfsr16_t * asg);
 
+/**
+  * @brief Initialize a ::asg_lfsr32_t structure using the default seeds
+  * 
+  * @param asg Pointer to the ::asg_lfsr32_t structure to be initialized.
+  */
 void asg_lfsr32_vInit(asg_lfsr32_t * asg);
 
+/**
+  * @brief Initialize a ::asg_lfsr64_t structure using the default seeds
+  * 
+  * @param asg Pointer to the ::asg_lfsr64_t structure to be initialized.
+  */
 void asg_lfsr64_vInit(asg_lfsr64_t * asg);
+/**@}*/ 
 
 
 /**
- * Add entropy to an ::asg_lfsr16_t structure. This function simply replaces 
- * the seeds with the provided entropy.
+ * @name Alternating Step Generator Add Entropy Functions
+ * 
+ * Add entropy to the alternating step gnerator. These functions simply 
+ * replace the contained LFSRs with the provided entropy bytes. With the 
+ * deprecation of the ASG Initialization functions, applications must call 
+ * this function and provide some entropy before the SG is usable. 
+ * 
+ * If randomness is required, entropy should come from a random source.
+ * If determinism is required, the default seed or another predetermined 
+ * constant may be used. 
+ */
+/**@{*/ 
+
+/**
+ * @brief Add entropy to a ::asg_lfsr16_t structure. 
  * 
  * @param asg Pointer to the ::asg_lfsr16_t structure.
- * @param entropy Pointer to a buffer containing the atleast 6 bytes of 
- *                 entropy, preferably from a random source, 
+ * @param entropy buffer containing the atleast 6 bytes of entropy
  */
 void asg_lfsr16_vAddEntropy(asg_lfsr16_t * asg, void * entropy);
 
+/**
+ * @brief Add entropy to a ::asg_lfsr32_t structure. 
+ * 
+ * @param asg Pointer to the ::asg_lfsr32_t structure.
+ * @param entropy buffer containing the atleast 12 bytes of entropy
+ */
 void asg_lfsr32_vAddEntropy(asg_lfsr32_t * asg, void * entropy);
 
+/**
+ * @brief Add entropy to a ::asg_lfsr64_t structure. 
+ * 
+ * @param asg Pointer to the ::asg_lfsr64_t structure.
+ * @param entropy buffer containing the atleast 24 bytes of entropy
+ */
 void asg_lfsr64_vAddEntropy(asg_lfsr64_t * asg, void * entropy);
+/**@}*/ 
 
 
 /**
-  * Get the next byte in the pseudo random binary sequence.
+ * @name Alternating Step Generator Get Next Byte Functions
+ * 
+ * Get the next byte in the Alternating Step Generator's pseudo random 
+ * binary sequence. This function constructs the byte by repeatedly calling 
+ * the bit generation functions. 
+ * 
+ */
+/**@{*/ 
+
+/**
+  * @brief Get the next byte in the ASG16 pseudo random binary sequence.
   * 
   * @param asg Pointer to the ::asg_lfsr16_t structure.
   * @return The next byte in the sequence.
   */
 uint8_t asg_lfsr16_cGetNextByte(asg_lfsr16_t * asg);
 
+/**
+  * @brief Get the next byte in the ASG32 pseudo random binary sequence.
+  * 
+  * @param asg Pointer to the ::asg_lfsr32_t structure.
+  * @return The next byte in the sequence.
+  */
 uint8_t asg_lfsr32_cGetNextByte(asg_lfsr32_t * asg);
 
+/**
+  * @brief Get the next byte in the ASG64 pseudo random binary sequence.
+  * 
+  * @param asg Pointer to the ::asg_lfsr64_t structure.
+  * @return The next byte in the sequence.
+  */
 uint8_t asg_lfsr64_cGetNextByte(asg_lfsr64_t * asg);
+/**@}*/ 
 
 
 /**
-  * Get the next bit in the pseudo random binary sequence.
+ * @name Alternating Step Generator Get Next Bit Functions
+ * 
+ * Get the next bit in the Alternating Step Generator's pseudo random 
+ * binary sequence. This is the functional core of the ASG implementation.
+ */
+/**@{*/ 
+
+/**
+  * @brief Get the next bit in the ASG16 pseudo random binary sequence.
   * 
   * @param asg Pointer to the ::asg_lfsr16_t structure.
   * @return The next bit in the sequence.
   */
 int asg_lfsr16_bGetNextBit(asg_lfsr16_t * asg);
 
+/**
+  * @brief Get the next bit in the ASG32 pseudo random binary sequence.
+  * 
+  * @param asg Pointer to the ::asg_lfsr32_t structure.
+  * @return The next bit in the sequence.
+  */
 int asg_lfsr32_bGetNextBit(asg_lfsr32_t * asg);
 
+/**
+  * @brief Get the next bit in the ASG64 pseudo random binary sequence.
+  * 
+  * @param asg Pointer to the ::asg_lfsr64_t structure.
+  * @return The next bit in the sequence.
+  */
 int asg_lfsr64_bGetNextBit(asg_lfsr64_t * asg);
+/**@}*/ 
 
 #endif

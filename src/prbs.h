@@ -27,33 +27,33 @@
  * 
  * The following generators are currently implemented :
  * 
- *  - Linear Feedback Shift Register (16 bit)
+ *  - Linear Feedback Shift Register (16, 32, 64 bit)
  * 
  *    A 16 bit Galois LFSR implementation, intended for BER and protocol 
- *    tests. Is not cryptographically secure. The LFSR has a maximal period
- *    of (2^16 - 1), for the correct choice of polynomials. This period is 
- *    pretty short for most random applications. Increasing the length of the
- *    state variable, and consequently the period, has serious implications 
- *    on performance. 
+ *    tests. This is not cryptographically secure. The LFSR has a maximal 
+ *    period of (2^16 - 1), for the correct choice of polynomial. This period 
+ *    is pretty short for most random applications. Increasing the length of 
+ *    the state variable, and consequently the period, has serious implications 
+ *    on performance. 32 and 64 bit versions are included with the library for
+ *    applications that require them.
  * 
  *    @see lfsr.h
  * 
  *  - Shrinking Generator
  * 
- *    A shrinking generator composed of two 16 bit Galois LFSRs. This is 
- *    not cryptographically secure either. Due to the short periods of the
- *    included LFSRs, this generator has minimal applications in the real 
- *    world. It needs _much_ longer LFSRs to be useful.
+ *    Composed of two Galois LFSRs. This is not cryptographically secure 
+ *    either. Due to the short periods of the included LFSRs, this generator 
+ *    seems to have minimal applications in the real world.
  *    
  *    @see sg.h
  * 
  *  - Alternating Step Generator
  * 
- *    Composed of three 16 bit Galois LFSRs. This is not cryptographically
- *    secure. This is probably the optimal generator for relatively 
+ *    Composed of three Galois LFSRs. While still not cryptographically 
+ *    secure, this is probably the optimal generator for relatively 
  *    non-critical random number generation. This generator produces a 
- *    reasonably good pseduo-random bit stream at a considerably lower 
- *    cost than other 'better' bit stream generation alogrithms.
+ *    reasonably good pseduo-random bit stream at a lower cost than other 
+ *    'better' bit stream generation alogrithms.
  * 
  *    @see asg.h
  * 
@@ -70,9 +70,11 @@
  * significantly more expensive in all respects. 
  * 
  * The following PRNGs look amusing but are not yet included here : 
+ * 
  *  - TinyMT : The 32-bit variant of the Mersenne Twister may be able to run
  *             on constrained platforms, but seems still too heavy to 
  *             prioritize implementation
+ * 
  *  - PCG : The permuted congruential generator, while probably heavier than
  *          LFSRs, may provide the best of multiple worlds. Implementation is
  *          currently deferred pending performance testing on the rand() LCG.
@@ -91,5 +93,17 @@
 #include "lfsr.h"
 #include "sg.h"
 #include "asg.h"
+
+
+/**
+ * @brief Install the PRBS library descriptor to the application.
+ * 
+ * The PRBS application descriptor contains the library version number and is
+ * installed to the application descriptors with the tag specified in UCDM's 
+ * descriptor header as DESCRIPTOR_TAG_LIBVERSION. 
+ * 
+ * This does not effect the functionality of the PRBS library in any way.
+ */
+void prbs_install_descriptor(void);
 
 #endif

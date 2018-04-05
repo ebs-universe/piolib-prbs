@@ -32,85 +32,187 @@
 #ifndef PRBS_SG_H
 #define PRBS_SG_H
 
-#include<stdint.h>
 #include "lfsr.h"
 
+
 /**
- * @brief 16 bit LFSR based Shrinking Generator struct typedef
+ * @name Shrinking Generator Typedefs
  * 
- * The core of SG PRBS implementation is made of this struct, which represents
- * a LFSR16 based shrinking generator. Values in the struct should not be used 
- * directly. The functions listed in the interface can be used to operate on 
- * the SG. 
+ * These types contain the core of Shrinking Generators. Each is composed of 
+ * two LFSRs of appropriate sizes. 
+ * 
+ * Values in the struct should not be used directly. The functions listed in 
+ * the interface can be used to operate on the SG. 
+ */
+/**@{*/ 
+
+/**
+ * @brief 16 bit LFSR based Shrinking Generator
  */
 typedef struct SG_LFSR16_t{
     lfsr16_t a;     /**< @brief LFSR16 A */
     lfsr16_t b;     /**< @brief LFSR16 B */
 } sg_lfsr16_t;
 
+/**
+ * @brief 32 bit LFSR based Shrinking Generator
+ */
 typedef struct SG_LFSR32_t{
-    lfsr32_t a;     /**< @brief LFSR16 A */
-    lfsr32_t b;     /**< @brief LFSR16 B */
+    lfsr32_t a;     /**< @brief LFSR32 A */
+    lfsr32_t b;     /**< @brief LFSR32 B */
 } sg_lfsr32_t;
 
+/**
+ * @brief 64 bit LFSR based Shrinking Generator
+ */
 typedef struct SG_LFSR64_t{
-    lfsr64_t a;     /**< @brief LFSR16 A */
-    lfsr64_t b;     /**< @brief LFSR16 B */
+    lfsr64_t a;     /**< @brief LFSR64 A */
+    lfsr64_t b;     /**< @brief LFSR64 B */
 } sg_lfsr64_t;
+/**@}*/ 
 
 
 /**
-  * Initialize a ::sg_lfsr16_t structure using the default seeds and 
-  * polynomials (taps). Entropy may be added after using the AddEntropy
-  * function
+ * @name Shrinking Generator Initialization Functions
+ * 
+ * Intialize the shrinking generator's LFSRs with the default seed. These 
+ * functions are superceded by the AddEntropy functions, and is retained 
+ * here for backwards compatibility.
+ * 
+ * Applications should avoid using these.
+ */
+/**@{*/ 
+
+/**
+  * @brief Initialize a ::sg_lfsr16_t structure using the default seeds
   * 
   * @param sg Pointer to the ::sg_lfsr16_t structure to be initialized.
   */
 void sg_lfsr16_vInit(sg_lfsr16_t * sg);
 
+/**
+  * @brief Initialize a ::sg_lfsr32_t structure using the default seeds
+  * 
+  * @param sg Pointer to the ::sg_lfsr32_t structure to be initialized.
+  */
 void sg_lfsr32_vInit(sg_lfsr32_t * sg);
 
+/**
+  * @brief Initialize a ::sg_lfsr64_t structure using the default seeds
+  * 
+  * @param sg Pointer to the ::sg_lfsr64_t structure to be initialized.
+  */
 void sg_lfsr64_vInit(sg_lfsr64_t * sg);
-
+/**@}*/ 
 
 /**
- * Add entropy to a ::sg_lfsr16_t structure. This function simply replaces 
- * the seeds with the provided entropy.
+ * @name Shrinking Generator Add Entropy Functions
+ * 
+ * Add entropy to the shrinking gnerator. These functions simply replaces 
+ * the contained LFSRs with the provided entropy bytes. With the deprecation 
+ * of the SG Initialization functions, applications must call this function 
+ * and provide some entropy before the SG is usable. 
+ * 
+ * If randomness is required, entropy should come from a random source.
+ * If determinism is required, the default seed or another predetermined 
+ * constant may be used. 
+ * 
+ */
+/**@{*/ 
+
+/**
+ * @brief Add entropy to a ::sg_lfsr16_t structure. 
  * 
  * @param sg Pointer to the ::sg_lfsr16_t structure.
- * @param entropy Pointer to a buffer containing the atleast 4 bytes of 
- *                entropy, preferably from a random source, 
+ * @param entropy buffer containing the atleast 4 bytes of entropy
  */
 void sg_lfsr16_vAddEntropy(sg_lfsr16_t * sg, void * entropy);
 
+/**
+ * @brief Add entropy to a ::sg_lfsr32_t structure. 
+ * 
+ * @param sg Pointer to the ::sg_lfsr32_t structure.
+ * @param entropy buffer containing the atleast 8 bytes of entropy
+ */
 void sg_lfsr32_vAddEntropy(sg_lfsr32_t * sg, void * entropy);
 
+/**
+ * @brief Add entropy to a ::sg_lfsr64_t structure. 
+ * 
+ * @param sg Pointer to the ::sg_lfsr64_t structure.
+ * @param entropy buffer containing the atleast 8 bytes of entropy
+ */
 void sg_lfsr64_vAddEntropy(sg_lfsr64_t * sg, void * entropy);
+/**@}*/ 
 
 
 /**
-  * Get the next byte in the pseudo random binary sequence.
+ * @name Shrinking Generator Get Next Byte Functions
+ * 
+ * Get the next byte in the Shrinking Generator's pseudo random binary 
+ * sequence. This function constructs the byte by repeatedly calling 
+ * the bit generation functions. 
+ * 
+ */
+/**@{*/ 
+
+/**
+  * Get the next byte in the SG16 pseudo random binary sequence.
   * 
   * @param sg Pointer to the ::sg_lfsr16_t structure.
   * @return The next byte in the sequence.
   */
 uint8_t sg_lfsr16_cGetNextByte(sg_lfsr16_t * sg);
 
+/**
+  * Get the next byte in the SG32 pseudo random binary sequence.
+  * 
+  * @param sg Pointer to the ::sg_lfsr32_t structure.
+  * @return The next byte in the sequence.
+  */
 uint8_t sg_lfsr32_cGetNextByte(sg_lfsr32_t * sg);
 
+/**
+  * Get the next byte in the SG64 pseudo random binary sequence.
+  * 
+  * @param sg Pointer to the ::sg_lfsr64_t structure.
+  * @return The next byte in the sequence.
+  */
 uint8_t sg_lfsr64_cGetNextByte(sg_lfsr64_t * sg);
+/**@}*/ 
 
 
 /**
-  * Get the next bit in the pseudo random binary sequence.
+ * @name Shrinking Generator Get Next Bit Functions
+ * 
+ * Get the next bit in the Shrinking Generator's pseudo random binary sequence. 
+ * This is the functional core of the SG implementation.
+ */
+/**@{*/ 
+
+/**
+  * @brief Get the next bit in the SG16 pseudo random binary sequence.
   * 
   * @param sg Pointer to the ::sg_lfsr16_t structure.
   * @return The next bit in the sequence.
   */
 int sg_lfsr16_bGetNextBit(sg_lfsr16_t * sg);
 
+/**
+  * @brief Get the next bit in the SG32 pseudo random binary sequence.
+  * 
+  * @param sg Pointer to the ::sg_lfsr32_t structure.
+  * @return The next bit in the sequence.
+  */
 int sg_lfsr32_bGetNextBit(sg_lfsr32_t * sg);
 
+/**
+  * @brief Get the next bit in the SG64 pseudo random binary sequence.
+  * 
+  * @param sg Pointer to the ::sg_lfsr64_t structure.
+  * @return The next bit in the sequence.
+  */
 int sg_lfsr64_bGetNextBit(sg_lfsr64_t * sg);
+/**@}*/ 
 
 #endif

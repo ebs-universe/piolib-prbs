@@ -19,6 +19,15 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
+/**
+ * @file sg.c
+ * @brief Implementation of the SG prbs generator
+ * 
+ * See sg.h for usage documentation. Implementation 
+ * documentation should be added to this file as some point. 
+ *
+ */
+
 #include "sg.h"
 
 void sg_lfsr16_vInit(sg_lfsr16_t * sg)

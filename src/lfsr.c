@@ -25,8 +25,7 @@
  * 
  * See lfsr.h for usage documentation. Implementation 
  * documentation should be added to this file as some point. 
- * 
- * @see lfsr.h
+ *
  */
 
 #include "lfsr.h"
