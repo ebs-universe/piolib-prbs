@@ -27,6 +27,8 @@
 
 #include "prbs.h"
 #include "config.h"
+
+#ifndef SWIG
 #include <ucdm/descriptor.h>
 
 
@@ -39,3 +41,5 @@ void prbs_install_descriptor(void)
 {
     descriptor_install(&prbs_descriptor);
 }
+
+#endif

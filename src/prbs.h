@@ -94,6 +94,7 @@
 #include "sg.h"
 #include "asg.h"
 
+#ifndef SWIG
 
 /**
  * @brief Install the PRBS library descriptor to the application.
@@ -105,5 +106,7 @@
  * This does not effect the functionality of the PRBS library in any way.
  */
 void prbs_install_descriptor(void);
+
+#endif
 
 #endif

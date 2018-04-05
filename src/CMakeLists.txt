@@ -15,16 +15,16 @@ SET(PROJECT_VERSION_MINOR   1)
 SET(PROJECT_VERSION_PATCH   0)
 SET(PROJECT_VERSION_TWEAK   0)
 
+LIST(APPEND CMAKE_MODULE_PATH "/home/chintal/code/toolchains")
 INCLUDE(ebs/lib-conf)
 
 FILE(GLOB SOURCES *.c)
 FILE(GLOB_RECURSE HEADERS *.h)
 
-FIND_PACKAGE("ucdm" REQUIRED)
-
 IF(CMAKE_TOOLCHAIN_FILE)
     # This is a cross-platform build, and therefore is assumed to be intended for an 
     # embedded target.
+    FIND_PACKAGE("ucdm" REQUIRED)
     ADD_PLATFORM_LIBRARY(prbs STATIC "ucdm" ${SOURCES})
     IF(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
         INSTALL_PLATFORM_LIBRARY(prbs ${HEADERS})
@@ -45,8 +45,8 @@ ELSE(CMAKE_TOOLCHAIN_FILE)
     FIND_PACKAGE(PythonLibs 2.7 REQUIRED)
     INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
     INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-    SET(CMAKE_SWIG_FLAGS "")
-    SWIG_ADD_MODULE(prbs python prbs.i lfsr.c sg.c asg.c)
+    set(CMAKE_SWIG_FLAGS "")
+    SWIG_ADD_LIBRARY(prbs LANGUAGE python SOURCES prbs.i lfsr.c sg.c asg.c)
     SWIG_LINK_LIBRARIES(prbs ${PYTHON_LIBRARIES})
     
     # Install PYTHON bindings

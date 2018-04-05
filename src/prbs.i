@@ -1,16 +1,23 @@
- %include "stdint.i"
+%include "stdint.i"
 
- %module prbs
- %{
+%module prbs
+%{
  /* Includes the header in the wrapper code */
+ #include "config.h"
  #include "prbs.h"
  #include "lfsr.h"
  #include "sg.h"
  #include "asg.h"
- %}
+%}
 
- /* Parse the header file to generate wrappers */
- %include "prbs.h"
- %include "lfsr.h"
- %include "sg.h"
- %include "asg.h"
+/* Parse the header file to generate wrappers */
+%include "config.h"
+%include "prbs.h"
+%include "lfsr.h"
+%include "sg.h"
+%include "asg.h"
+ 
+%pythoncode %{
+__version__ = PRBS_VERSION
+%}
+
