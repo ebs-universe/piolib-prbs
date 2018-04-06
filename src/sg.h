@@ -34,6 +34,10 @@
 
 #include "lfsr.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 /**
  * @name Shrinking Generator Typedefs
@@ -214,5 +218,9 @@ int sg_lfsr32_bGetNextBit(sg_lfsr32_t * sg);
   */
 int sg_lfsr64_bGetNextBit(sg_lfsr64_t * sg);
 /**@}*/ 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

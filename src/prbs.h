@@ -96,6 +96,11 @@
 
 #ifndef SWIG
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /**
  * @brief Install the PRBS library descriptor to the application.
  * 
@@ -107,6 +112,9 @@
  */
 void prbs_install_descriptor(void);
 
+#ifdef __cplusplus
+}
+#endif
 #endif
 
 #endif

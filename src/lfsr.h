@@ -48,9 +48,13 @@
 
 #ifndef PRBS_LFSR_H
 #define PRBS_LFSR_H
-
+ 
 #include<stdint.h>
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 /**
  * @name LFSR Taps and default seeds
@@ -238,5 +242,9 @@ int lfsr32_bGetNextBit(lfsr32_t * lfsrp);
   */
 int lfsr64_bGetNextBit(lfsr64_t * lfsrp);
 /**@}*/ 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -40,6 +40,10 @@
 
 #include "lfsr.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 /**
  * @name Alternating Step Generator Typedefs
@@ -223,5 +227,9 @@ int asg_lfsr32_bGetNextBit(asg_lfsr32_t * asg);
   */
 int asg_lfsr64_bGetNextBit(asg_lfsr64_t * asg);
 /**@}*/ 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
