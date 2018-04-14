@@ -1,10 +1,7 @@
 avr/
 msp430/
 host/
-test/analysis/data/
-test/analysis/nist_sp_800-22/sts-2.1.2/obj/
-test/analysis/nist_sp_800-22/sts-2.1.2/assess
-test/analysis/nist_sp_800-22/sts-2.1.2/experiments/
+test/analysis/
 test/software/data/
 *.kdev4
 *.idea
