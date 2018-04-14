@@ -1,5 +1,6 @@
 avr/
 msp430/
 host/
+*/data/
 *.kdev4
 *.idea
