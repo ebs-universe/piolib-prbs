@@ -33,8 +33,8 @@
 
 
 /** @brief PRBS Library Version Descriptor */
-static descriptor_custom_t prbs_descriptor = {DESCRIPTOR_TAG_LIBVERSION, 
-    sizeof(PRBS_VERSION), DESCRIPTOR_ACCTYPE_PTR, {PRBS_VERSION}, NULL};
+static descriptor_custom_t prbs_descriptor = {NULL, DESCRIPTOR_TAG_LIBVERSION, 
+    sizeof(PRBS_VERSION), DESCRIPTOR_ACCTYPE_PTR, {PRBS_VERSION}};
 
 
 void prbs_install_descriptor(void)
