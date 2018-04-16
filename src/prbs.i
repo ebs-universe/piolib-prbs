@@ -16,6 +16,9 @@
 %include "lfsr.h"
 %include "sg.h"
 %include "asg.h"
+
+%include "carrays.i"
+%array_class(uint8_t, buffer);
  
 %pythoncode %{
 __version__ = PRBS_VERSION
