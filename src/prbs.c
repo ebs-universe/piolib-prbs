@@ -25,8 +25,8 @@
  */
 
 
-#include "prbs.h"
-#include "config.h"
+#include "prbs/prbs.h"
+#include "prbs/config.h"
 
 #ifndef SWIG
 #include <ucdm/descriptor.h>
