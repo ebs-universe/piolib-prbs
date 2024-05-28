@@ -28,7 +28,7 @@
  *
  */
 
-#include "prbs/asg.h"
+#include "asg.h"
 
 void asg_lfsr16_vInit(asg_lfsr16_t * asg)
 {

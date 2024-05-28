@@ -28,7 +28,7 @@
  *
  */
 
-#include "prbs/sg.h"
+#include "sg.h"
 
 void sg_lfsr16_vInit(sg_lfsr16_t * sg)
 {

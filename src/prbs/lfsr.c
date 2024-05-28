@@ -28,7 +28,7 @@
  *
  */
 
-#include "prbs/lfsr.h"
+#include "lfsr.h"
 
 
 void lfsr16_vInit(lfsr16_t * lfsrp){

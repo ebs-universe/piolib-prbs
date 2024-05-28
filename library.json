@@ -1,6 +1,6 @@
 {
     "name": "ebs-prbs",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Simple pseudo random bitstream generator for link and protocol testing",
     "keywords": "ebs",
     "repository": {
@@ -17,7 +17,11 @@
     "homepage": "https://github.com/ebs-universe",
     "frameworks": "*",
     "platforms": "*",
-    "dependencies": {
-        "chintal/ebs-ds": "^0.1.1"
-    }
+    "dependencies": [
+        { 
+            "owner": "chintal",
+            "name": "ebs-ds",
+            "version": "^0.2.0"
+        }
+    ]
   }
