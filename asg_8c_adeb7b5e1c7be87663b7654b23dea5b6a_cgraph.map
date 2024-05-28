@@ -1,0 +1,5 @@
+<map id="asg_lfsr32_cGetNextByte" name="asg_lfsr32_cGetNextByte">
+<area shape="rect" id="node1" title="Get the next byte in the ASG32 pseudo random binary sequence." alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node2" href="$asg_8c.html#ab40fb4d66ab36709e7a08ce70820885c" title="Get the next bit in the ASG32 pseudo random binary sequence." alt="" coords="240,5,416,32"/>
+<area shape="rect" id="node3" href="$lfsr_8c.html#a8707278949b959bb80efb5eac123b072" title="Get the next bit in the LFSR32 pseudo random binary sequence." alt="" coords="464,5,611,32"/>
+</map>

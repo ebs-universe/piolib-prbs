@@ -1,0 +1,4 @@
+<map id="sg_lfsr32_bGetNextBit" name="sg_lfsr32_bGetNextBit">
+<area shape="rect" id="node1" title="Get the next bit in the SG32 pseudo random binary sequence." alt="" coords="5,5,173,32"/>
+<area shape="rect" id="node2" href="$lfsr_8c.html#a8707278949b959bb80efb5eac123b072" title="Get the next bit in the LFSR32 pseudo random binary sequence." alt="" coords="221,5,368,32"/>
+</map>

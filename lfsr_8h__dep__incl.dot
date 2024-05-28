@@ -1,0 +1,25 @@
+digraph "prbs/lfsr.h"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="prbs/lfsr.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Interface and usage of the lfsr prbs generator."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="prbs/asg.h",height=0.2,width=0.4,color="black",URL="$asg_8h.html",tooltip="Interface and usage of the alternating step prbs generator."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="prbs/asg.c",height=0.2,width=0.4,color="black",URL="$asg_8c.html",tooltip="Implementation of the asg prbs generator."];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="prbs/prbs.h",height=0.2,width=0.4,color="black",URL="$prbs_8h.html",tooltip="Interface and usage of prbs generators."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="prbs/prbs.c",height=0.2,width=0.4,color="black",URL="$prbs_8c.html",tooltip="PRBS library descriptor."];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="prbs/lfsr.c",height=0.2,width=0.4,color="black",URL="$lfsr_8c.html",tooltip="Implementation of the lfsr prbs generator."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="prbs/sg.h",height=0.2,width=0.4,color="black",URL="$sg_8h.html",tooltip="Interface and usage of the shrinking prbs generator."];
+  Node7 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="prbs/sg.c",height=0.2,width=0.4,color="black",URL="$sg_8c.html",tooltip="Implementation of the SG prbs generator."];
+}

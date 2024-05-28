@@ -1,0 +1,5 @@
+<map id="lfsr32_vInit" name="lfsr32_vInit">
+<area shape="rect" id="node1" title="Initialize a lfsr32_t structure using the default seed, LFSR32_SEED." alt="" coords="179,31,273,57"/>
+<area shape="rect" id="node2" href="$asg_8c.html#a84de59bc696fe919a52785c20c2964c2" title="Initialize a asg_lfsr32_t structure using the default seeds." alt="" coords="5,5,131,32"/>
+<area shape="rect" id="node3" href="$sg_8c.html#ab2e083c295695d1c5e815d1dbfc421dd" title="Initialize a sg_lfsr32_t structure using the default seeds." alt="" coords="9,56,127,83"/>
+</map>

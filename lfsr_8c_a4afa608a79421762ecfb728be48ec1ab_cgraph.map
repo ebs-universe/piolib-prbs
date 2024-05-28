@@ -1,0 +1,4 @@
+<map id="lfsr16_cGetNextByte" name="lfsr16_cGetNextByte">
+<area shape="rect" id="node1" title="Get the next byte in the LFSR16 pseudo random binary sequence." alt="" coords="5,5,163,32"/>
+<area shape="rect" id="node2" href="$lfsr_8c.html#afb75cdae18068887a33c9bd5aff21f94" title="Get the next bit in the LFSR16 pseudo random binary sequence." alt="" coords="211,5,357,32"/>
+</map>

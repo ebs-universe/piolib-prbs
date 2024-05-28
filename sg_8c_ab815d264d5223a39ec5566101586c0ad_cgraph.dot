@@ -1,0 +1,14 @@
+digraph "sg_lfsr64_cGetNextByte"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="sg_lfsr64_cGetNextByte",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Get the next byte in the SG64 pseudo random binary sequence."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="sg_lfsr64_bGetNextBit",height=0.2,width=0.4,color="black",URL="$sg_8c.html#ae48799ec34719b8868b5b83cd798cc93",tooltip="Get the next bit in the SG64 pseudo random binary sequence."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="lfsr64_bGetNextBit",height=0.2,width=0.4,color="black",URL="$lfsr_8c.html#aee13fbdc90bb4a7dd1683836555dbecb",tooltip="Get the next bit in the LFSR64 pseudo random binary sequence."];
+}

@@ -1,0 +1,6 @@
+<map id="prbs/asg.h" name="prbs/asg.h">
+<area shape="rect" id="node1" title="Interface and usage of the alternating step prbs generator." alt="" coords="62,5,151,32"/>
+<area shape="rect" id="node2" href="$asg_8c.html" title="Implementation of the asg prbs generator." alt="" coords="5,80,93,107"/>
+<area shape="rect" id="node3" href="$prbs_8h.html" title="Interface and usage of prbs generators." alt="" coords="118,80,213,107"/>
+<area shape="rect" id="node4" href="$prbs_8c.html" title="PRBS library descriptor." alt="" coords="119,155,212,181"/>
+</map>

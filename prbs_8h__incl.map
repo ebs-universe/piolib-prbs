@@ -1,0 +1,7 @@
+<map id="prbs/prbs.h" name="prbs/prbs.h">
+<area shape="rect" id="node1" title="Interface and usage of prbs generators." alt="" coords="5,5,100,32"/>
+<area shape="rect" id="node2" href="$lfsr_8h.html" title="Interface and usage of the lfsr prbs generator." alt="" coords="25,155,80,181"/>
+<area shape="rect" id="node4" href="$sg_8h.html" title="Interface and usage of the shrinking prbs generator." alt="" coords="28,80,77,107"/>
+<area shape="rect" id="node5" href="$asg_8h.html" title="Interface and usage of the alternating step prbs generator." alt="" coords="101,80,159,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="17,229,88,256"/>
+</map>

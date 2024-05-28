@@ -1,0 +1,4 @@
+<map id="sg_lfsr64_vInit" name="sg_lfsr64_vInit">
+<area shape="rect" id="node1" title="Initialize a sg_lfsr64_t structure using the default seeds." alt="" coords="5,5,123,32"/>
+<area shape="rect" id="node2" href="$lfsr_8c.html#a60c1e9b737e0e0afaff44992c2332d7d" title="Initialize a lfsr64_t structure using the default seed, LFSR64_SEED." alt="" coords="171,5,265,32"/>
+</map>

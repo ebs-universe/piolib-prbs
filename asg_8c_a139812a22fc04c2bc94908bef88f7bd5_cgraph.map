@@ -1,0 +1,4 @@
+<map id="asg_lfsr32_vAddEntropy" name="asg_lfsr32_vAddEntropy">
+<area shape="rect" id="node1" title="Add entropy to a asg_lfsr32_t structure." alt="" coords="5,5,184,32"/>
+<area shape="rect" id="node2" href="$lfsr_8c.html#a1f4d75f8446cb9eece072a73086eb89f" title="Add entropy to a lfsr32_t structure." alt="" coords="232,5,381,32"/>
+</map>

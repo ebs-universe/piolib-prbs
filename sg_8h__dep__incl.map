@@ -1,0 +1,6 @@
+<map id="prbs/sg.h" name="prbs/sg.h">
+<area shape="rect" id="node1" title="Interface and usage of the shrinking prbs generator." alt="" coords="68,5,149,32"/>
+<area shape="rect" id="node2" href="$prbs_8h.html" title="Interface and usage of prbs generators." alt="" coords="5,80,100,107"/>
+<area shape="rect" id="node4" href="$sg_8c.html" title="Implementation of the SG prbs generator." alt="" coords="125,80,205,107"/>
+<area shape="rect" id="node3" href="$prbs_8c.html" title="PRBS library descriptor." alt="" coords="6,155,99,181"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="sg_lfsr16_vAddEntropy" name="sg_lfsr16_vAddEntropy">
+<area shape="rect" id="node1" title="Add entropy to a sg_lfsr16_t structure." alt="" coords="5,5,176,32"/>
+<area shape="rect" id="node2" href="$lfsr_8c.html#a704e014b641cfd81d2a8e2a6a4393246" title="Add entropy to a lfsr16_t structure." alt="" coords="224,5,373,32"/>
+</map>

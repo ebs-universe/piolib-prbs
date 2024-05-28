@@ -1,0 +1,4 @@
+<map id="sg_lfsr64_bGetNextBit" name="sg_lfsr64_bGetNextBit">
+<area shape="rect" id="node1" title="Get the next bit in the SG64 pseudo random binary sequence." alt="" coords="5,5,173,32"/>
+<area shape="rect" id="node2" href="$lfsr_8c.html#aee13fbdc90bb4a7dd1683836555dbecb" title="Get the next bit in the LFSR64 pseudo random binary sequence." alt="" coords="221,5,368,32"/>
+</map>

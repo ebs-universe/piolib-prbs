@@ -1,0 +1,5 @@
+<map id="lfsr16_vInit" name="lfsr16_vInit">
+<area shape="rect" id="node1" title="Initialize a lfsr16_t using the default seed, LFSR16_SEED." alt="" coords="179,31,273,57"/>
+<area shape="rect" id="node2" href="$asg_8c.html#abd445b688f7886a0beea5fe8a26add3a" title="Initialize a asg_lfsr16_t structure using the default seeds." alt="" coords="5,5,131,32"/>
+<area shape="rect" id="node3" href="$sg_8c.html#a90771f19eaee77745a4ef57c66af5e34" title="Initialize a sg_lfsr16_t structure using the default seeds." alt="" coords="9,56,127,83"/>
+</map>
